@@ -21,6 +21,16 @@ Here is how to launch the app.
 blogyaml::edit_tags()
 ```
 
+The workflow shoud ideally be:
+
+* Have a local copy/clone of the website, and even work in a branch.
+
+* Update tags (adding tags to posts, creating new tags) by using the app. 
+
+* Have a look at changes in a git editor before committing/pushing/merging them.
+
+This sounds in my opinion more appealing than opening each post on its own, because one gets to see all posts at once. My goal is to make adding tags to posts as user-friendly as adding topics to GitHub repositories.
+
 ## Notes
 
 The package depends on an unexported `blogdown` function, `blogdown:::modify_yaml`.
