@@ -19,5 +19,12 @@ inject_tags <- function(path, tags){
 inject_tags_file <- function(tags_one, path){
   file <- tags_one$file
   tags <- names(tags_one[2:ncol(tags_one)])[t(tags_one[2:ncol(tags_one)])]
-  blogdown:::modify_yaml(file.path(path, file), tags = tags)
-}
+  original_tags <- rmarkdown::yaml_front_matter(file.path(path, file),
+                                                encoding = "utf8")$tags
+
+  # only edit if needed
+  if(!all(tags %in% original_tags)){
+    blogdown:::modify_yaml(file.path(path, file), tags = tags)
+  }
+
+  }
