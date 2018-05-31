@@ -39,7 +39,7 @@ server <- function(input, output) {
     input$saveBtn
     tags = isolate(input$tags)
     if (!is.null(tags)) {
-      blogyaml::inject_tags(input$path,
+      blogyaml::inject_tags(path()[1],
                             rhandsontable::hot_to_r(input$tags))
     }
   })})
