@@ -25,3 +25,8 @@ blogyaml::edit_tags()
 
 The package depends on an unexported `blogdown` function, `blogdown:::modify_yaml`.
 
+## Meta
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
+
