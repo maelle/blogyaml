@@ -1,0 +1,19 @@
+Package: blogyaml
+Type: Package
+Title: Helps Editing Tags of Markdown Based Blog Posts
+Version: 0.1.0
+Authors@R: c(person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = c("aut", "cre")),
+  person("rOpenSci", role = c("fnd")))
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    shinydashboard,
+    fs,
+    rmarkdown,
+    magrittr,
+    tibble,
+    dplyr
+RoxygenNote: 6.0.1
