@@ -12,11 +12,11 @@
 #' inject_tags(path, tags)
 inject_tags <- function(path, tags){
   tags_df <- split(tags, tags$file)
-  purrr::walk(tags_df, inject_tags_file)
+  purrr::walk(tags_df, inject_tags_file, path)
   message("Check the edits carefully before pushing them!")
 }
 
-inject_tags_file <- function(path, tags_one){
+inject_tags_file <- function(tags_one, path){
   file <- tags_one$file
   tags <- names(tags_one[2:ncol(tags_one)])[t(tags_one[2:ncol(tags_one)])]
   blogdown:::modify_yaml(file.path(path, file), tags = tags)

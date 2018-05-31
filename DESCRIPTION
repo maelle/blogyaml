@@ -16,5 +16,6 @@ Imports:
     magrittr,
     tibble,
     dplyr,
-    blogdown
+    blogdown,
+    rhandsontable
 RoxygenNote: 6.0.1
