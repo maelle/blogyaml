@@ -4,7 +4,7 @@ library("shinydashboard")
 library("magrittr")
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Basic dashboard"),
+  dashboardHeader(title = "Batch tag editing"),
   dashboardSidebar( box(
     title = "Path to posts",
     textInput(inputId = "path",
