@@ -17,18 +17,16 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-  volumes <- c(here = getwd(),
-               home = path.expand("~"))
+  volumes <- c(home = path.expand("~"))
   shinyDirChoose(input, 'path', roots = volumes)
-  path <- reactive(input$path)
+
+  path <- reactive({
+    return(print(parseDirPath(volumes, input$path)))
+  })
 
   observeEvent(input$do, {
   output$tags = rhandsontable::renderRHandsontable({
-    roots = c(wd='.')
-    path <- parseDirPath(roots,path())
-    print(class(path))
-    initialtags <- blogyaml::get_tags(path())
-    print("ok")
+    initialtags <- blogyaml::get_tags(path()[1])
   rhandsontable::rhandsontable(initialtags,
                                readOnly = FALSE,
                                search = TRUE)%>%
