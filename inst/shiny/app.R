@@ -2,20 +2,25 @@
 library("shiny")
 library("shinydashboard")
 library("magrittr")
+library("shinyFiles")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Batch tag editing"),
-  dashboardSidebar( box(
-    title = "Path to posts",
-    textInput(inputId = "path",
-              label = "path",
-              value = "C:\\Users\\Maelle\\Documents\\ropensci\\roweb2\\content\\blog"),
+  dashboardSidebar(
+    shinyDirButton(id = "path",
+              label = "path to posts",
+              title = "path to posts"),
     actionButton("saveBtn", "Save edits to posts YAML")
-  )),
+  ),
   dashboardBody(rhandsontable::rHandsontableOutput("tags"))
 )
 
 server <- function(input, output) {
+  volumes <- c(home = path.expand("~"),
+               here = getwd())
+  shinyDirChoose(input, 'path', roots = volumes)
+  output$directorypath <- renderPrint({parseDirPath(volumes, input$directory)})
+
   output$tags = rhandsontable::renderRHandsontable({
     initialtags <- blogyaml::get_tags(input$path)
   rhandsontable::rhandsontable(initialtags,

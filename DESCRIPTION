@@ -17,5 +17,6 @@ Imports:
     tibble,
     dplyr,
     blogdown,
-    rhandsontable
+    rhandsontable,
+    shinyFiles
 RoxygenNote: 6.0.1
