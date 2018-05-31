@@ -10,6 +10,7 @@ ui <- dashboardPage(
     shinyDirButton(id = "path",
               label = "path to posts",
               title = "path to posts"),
+    textInput("new", "New tags (comma separated)", "tag1, tag2, tag3"),
     actionButton("do", "Load current tags"),
     actionButton("saveBtn", "Save edits to posts YAML")
   ),
@@ -27,6 +28,24 @@ server <- function(input, output) {
   observeEvent(input$do, {
   output$tags = rhandsontable::renderRHandsontable({
     initialtags <- blogyaml::get_tags(path()[1])
+
+    newtags <- strsplit(input$new, ",")[[1]]
+    newtags <- trimws(newtags)
+    if(any(newtags == "file")){
+      stop("'file' cannot be a tag")
+    }
+    tags <- names(initialtags)[names(initialtags) != "file"]
+
+    # not existing tags!
+    newtags <- newtags[!newtags %in% tags]
+
+    # add nice rlang here
+    for(var in newtags){
+      initialtags[,var] <- FALSE
+    }
+
+
+    initialtags <- initialtags[,c("file", sort(c(newtags, tags)))]
   rhandsontable::rhandsontable(initialtags,
                                readOnly = FALSE,
                                search = TRUE)%>%
