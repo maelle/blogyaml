@@ -15,6 +15,7 @@ get_tags <- function(path){
   tags_info <- tidyr::spread(tags_info, tags, value, fill = FALSE)
   tags_info <- tibble::tibble(file = posts) %>%
     dplyr::left_join(tags_info, by = "file")
+  tags_info[is.na(tags_info)] <- FALSE
   return(tags_info)
 }
 
