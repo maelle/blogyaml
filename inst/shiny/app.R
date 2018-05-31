@@ -10,19 +10,25 @@ ui <- dashboardPage(
     shinyDirButton(id = "path",
               label = "path to posts",
               title = "path to posts"),
+    actionButton("do", "Load current tags"),
     actionButton("saveBtn", "Save edits to posts YAML")
   ),
   dashboardBody(rhandsontable::rHandsontableOutput("tags"))
 )
 
 server <- function(input, output) {
-  volumes <- c(home = path.expand("~"),
-               here = getwd())
+  volumes <- c(here = getwd(),
+               home = path.expand("~"))
   shinyDirChoose(input, 'path', roots = volumes)
-  output$directorypath <- renderPrint({parseDirPath(volumes, input$directory)})
+  path <- reactive(input$path)
 
+  observeEvent(input$do, {
   output$tags = rhandsontable::renderRHandsontable({
-    initialtags <- blogyaml::get_tags(input$path)
+    roots = c(wd='.')
+    path <- parseDirPath(roots,path())
+    print(class(path))
+    initialtags <- blogyaml::get_tags(path())
+    print("ok")
   rhandsontable::rhandsontable(initialtags,
                                readOnly = FALSE,
                                search = TRUE)%>%
@@ -38,7 +44,7 @@ server <- function(input, output) {
       blogyaml::inject_tags(input$path,
                             rhandsontable::hot_to_r(input$tags))
     }
-  })
+  })})
 }
 
 shinyApp(ui, server)
