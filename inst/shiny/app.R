@@ -10,6 +10,9 @@ ui <- dashboardPage(
     shinyDirButton(id = "path",
               label = "path to posts",
               title = "path to posts"),
+    checkboxGroupInput("format", "Post format",
+                       choices = c("*.md", "*.Rmd"),
+                       selected = "*.md"),
     textInput("new", "New tags (comma separated)", "tag1, tag2, tag3"),
     actionButton("do", "Load current tags"),
     actionButton("saveBtn", "Save edits to posts YAML")
@@ -27,7 +30,8 @@ server <- function(input, output) {
 
   observeEvent(input$do, {
   output$tags = rhandsontable::renderRHandsontable({
-    initialtags <- blogyaml::get_tags(path()[1])
+    initialtags <- blogyaml::get_tags(path()[1],
+                                      format = input$format)
 
     newtags <- strsplit(input$new, ",")[[1]]
     newtags <- trimws(newtags)

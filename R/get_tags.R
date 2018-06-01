@@ -1,13 +1,17 @@
 #' Title
 #'
 #' @param path Path to where the posts are located
+#' @param format String of post formats
 #'
 #' @return data.frame of filenames and tags as Booleans
 #' @export
 #'
 #' @examples
-get_tags <- function(path){
-  posts <- fs::dir_ls(path, regexp = "*.md")
+get_tags <- function(path, format){
+  if(format == c("*Rmd", "*.md")){
+    format <- "*.(R)?md"
+  }
+  posts <- fs::dir_ls(path, regexp = format)
   posts <- purrr::map_chr(posts, get_filename)
   posts <- posts[!grepl("^\\_", posts)]
   tags_info <- unique(purrr::map_df(posts, get_tags_post, path = path))
