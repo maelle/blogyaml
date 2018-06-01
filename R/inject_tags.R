@@ -23,7 +23,7 @@ inject_tags_file <- function(tags_one, path){
                                                 encoding = "utf8")$tags
 
   # only edit if needed
-  if(!all(tags %in% original_tags)){
+  if(!all(tags %in% original_tags)|any (!original_tags %in% tags)){
     blogdown:::modify_yaml(file.path(path, file), tags = tags)
   }
 
