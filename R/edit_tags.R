@@ -1,4 +1,9 @@
 #' @param path path to where the posts are found
+#' @title Shiny app for batch tag editing
+#' @details The YAML metadata can also be edited in other fields, e.g. a slug
+#' can become lala instead of 'lala' which should not pose any problem.
+#' That said, do check all edits before committing them (assuming your website is
+#'  under version control!).
 #' @export
 edit_tags <- function(path = getwd()) {
   .GlobalEnv$.posts.path <- path

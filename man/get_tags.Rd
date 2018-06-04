@@ -4,10 +4,12 @@
 \alias{get_tags}
 \title{Title}
 \usage{
-get_tags(path)
+get_tags(path, format)
 }
 \arguments{
 \item{path}{Path to where the posts are located}
+
+\item{format}{String of post formats}
 }
 \value{
 data.frame of filenames and tags as Booleans
