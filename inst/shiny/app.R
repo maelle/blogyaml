@@ -14,13 +14,14 @@ ui <- dashboardPage(
                        choices = c("*.md", "*.Rmd"),
                        selected = "*.md"),
     textInput("new", "New tags (comma separated)", "tag1, tag2, tag3"),
-    actionButton("do", "Load current tags"),
-    actionButton("saveBtn", "Save edits to posts YAML")
+    actionButton("do", "Load current tags", icon = shiny::icon("upload")),
+    actionButton("saveBtn", "Save edits to posts YAML", icon = shiny::icon("save"))
   ),
   dashboardBody(DT::dataTableOutput("tags1"))
 )
 
 server <- function(input, output) {
+  .posts.path <- "C:\\Users\\Maelle\\Documents\\ropensci\\roweb2\\content\\blog"
    volumes <- c(here = .posts.path,
                home = path.expand("~"))
   shinyDirChoose(input, 'path', roots = volumes)
@@ -56,10 +57,15 @@ server <- function(input, output) {
 
   output$tags1 = DT::renderDT(tagsinfo,
 editable = TRUE,
-extensions = 'ColReorder',
+#filter = "top",#didn't work well
+extensions = c('FixedColumns',
+               'ColReorder'),
 options = list(
   colReorder = TRUE,
-  search = list(smart = TRUE)
+  scrollX = TRUE,
+  search = list(smart = TRUE),
+  fixedColumns = list(leftColumns = 2),
+  pageLength = 5
 ))
 
 
