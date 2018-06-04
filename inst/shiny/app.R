@@ -21,7 +21,7 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-  volumes <- c(here = .posts.path,
+   volumes <- c(here = .posts.path,
                home = path.expand("~"))
   shinyDirChoose(input, 'path', roots = volumes)
 
@@ -32,6 +32,8 @@ server <- function(input, output) {
   observeEvent(input$do, {
     initialtags <- blogyaml::get_tags(path()[1],
                                       format = input$format)
+    initialtags <- dplyr::mutate_if(initialtags,
+                                    is.logical, as.numeric)
 
     newtags <- strsplit(input$new, ",")[[1]]
     newtags <- trimws(newtags)
@@ -49,9 +51,10 @@ server <- function(input, output) {
     }
 
 
-    tags <- initialtags[,c("file", sort(c(newtags, tags)))]
+    tagsinfo <- as.data.frame(initialtags[, c("file", sort(c(newtags, tags)))])
+    tagsinfo <<- tagsinfo
 
-  output$tags1 = DT::renderDT(tags,
+  output$tags1 = DT::renderDT(tagsinfo,
 editable = TRUE,
 extensions = 'ColReorder',
 options = list(
@@ -70,14 +73,15 @@ options = list(
     i = info$row
     j = info$col
     v = info$value
-    print(tags[i, j])
-    tags[i, j] <<- DT::coerceValue(v, tags[i, j])
-    DT::replaceData(proxy, tags, resetPaging = FALSE)  # important
+    print(tagsinfo[i, j])
+    tagsinfo[i, j] <<- DT::coerceValue(v, tagsinfo[i, j])
+    DT::replaceData(proxy, tagsinfo, resetPaging = FALSE)  # important
   })
 
   observeEvent(input$saveBtn, {
       blogyaml::inject_tags(path()[1],
-                            tags)
+                            dplyr::mutate_if(tagsinfo,
+                                             is.numeric, as.logical))
     }
   )
 }
