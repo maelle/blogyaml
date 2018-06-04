@@ -49,7 +49,7 @@ server <- function(input, output) {
 
     # add nice rlang here
     for(var in newtags){
-      initialtags[,var] <- FALSE
+      initialtags[,var] <- 0
     }
 
 
@@ -76,7 +76,6 @@ options = list(
 
   observeEvent(input$tags1_cell_edit, {
     info = input$tags1_cell_edit
-    print(info)
     i = info$row
     j = info$col
     v = info$value
