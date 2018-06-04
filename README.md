@@ -31,6 +31,18 @@ The workflow shoud ideally be:
 
 This sounds in my opinion more appealing than opening each post on its own, because one gets to see all posts at once. My goal is to make adding tags to posts as user-friendly as adding topics to GitHub repositories.
 
+### First step
+
+After launching the app via `blogyaml::edit_tags()` you can select the folder where the posts to be modified are. You can pass the path to the function, or rely on its getting your current directory, as well as all directories under `path.expand("~")`. All of this made possible by [`shinyFiles`](https://github.com/thomasp85/shinyFiles).
+
+![](README_files/where.png)
+
+### Edit away
+
+First load the tags, then edit, then click on "Save edits to posts YAML". After that, go look at the folder where your posts are and check the edits with e.g. your favourite git interface. Note: I might record a small video of my screen.
+
+![](README_files/editing.png)
+
 ## What this app shouldn't be used for
 
 Standardization of tags (e.g. making all tags lowercase, or transforming all occurrences of "Community" into "community") doesn't need to happen manually via this app. It can be scripted using [`blogdown:::modify_yaml`](https://bookdown.org/yihui/blogdown/from-jekyll.html) or similar helpers, cf [this example](https://github.com/ropensci/roweb2/issues/197#issuecomment-394264824).
