@@ -17,6 +17,6 @@ Imports:
     tibble,
     dplyr,
     yaml,
-    rhandsontable,
+    DT,
     shinyFiles
 RoxygenNote: 6.0.1
