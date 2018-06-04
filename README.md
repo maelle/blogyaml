@@ -31,9 +31,9 @@ The workflow shoud ideally be:
 
 This sounds in my opinion more appealing than opening each post on its own, because one gets to see all posts at once. My goal is to make adding tags to posts as user-friendly as adding topics to GitHub repositories.
 
-## Notes
+## Note
 
-The package depends on an unexported `blogdown` function, `blogdown:::modify_yaml`.
+The package uses a copy-pasted [internal `blogdown` function](https://github.com/rstudio/blogdown/blob/ad8be3ffb5ec8576a008375d8da6ec76ab01a902/R/utils.R#L465) hence the licence being GPL-3 like `blogdown`.
 
 ## Meta
 

@@ -6,7 +6,7 @@ Authors@R: c(person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role 
   person("rOpenSci", role = c("fnd")))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -16,7 +16,7 @@ Imports:
     magrittr,
     tibble,
     dplyr,
-    blogdown,
+    yaml,
     rhandsontable,
     shinyFiles
 RoxygenNote: 6.0.1

@@ -19,12 +19,31 @@ inject_tags <- function(path, tags){
 inject_tags_file <- function(tags_one, path){
   file <- tags_one$file
   tags <- names(tags_one[2:ncol(tags_one)])[t(tags_one[2:ncol(tags_one)])]
-  original_tags <- rmarkdown::yaml_front_matter(file.path(path, file),
-                                                encoding = "utf8")$tags
+  meta <- rmarkdown::yaml_front_matter(file.path(path, file),
+                                       encoding = "utf8")
+  original_tags <- meta$tags
 
   # only edit if needed
   if(!all(tags %in% original_tags)|any (!original_tags %in% tags)){
-    blogdown:::modify_yaml(file.path(path, file), tags = tags)
+    file_content <- readLines(file.path(path, file))
+    i = grep('^---\\s*$', file_content)
+    file_content <- file_content[(i[2]+1):length(file_content)]
+    meta$tags <- tags
+    file_content <- c(c("---"),
+                      blogdown:::as.yaml(meta),
+                      c("---"),
+                      file_content)
+    writeLines(file_content, file.path(path, file),
+               useBytes = TRUE)
   }
 
   }
+
+# from blogdown
+# https://github.com/rstudio/blogdown/blob/ad8be3ffb5ec8576a008375d8da6ec76ab01a902/R/utils.R#L465
+# a wrapper of yaml::as.yaml() to indent sublists by default and trim white spaces
+as.yaml = function(..., .trim_ws = TRUE) {
+  res = yaml::as.yaml(..., indent.mapping.sequence = TRUE)
+  Encoding(res) = 'UTF-8'
+  if (.trim_ws) sub('\\s+$', '', res) else res
+}
