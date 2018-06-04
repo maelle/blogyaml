@@ -7,13 +7,13 @@ The goal of `blogyaml` is to help batch editing tags of Markdown-based blog post
 
 ## Installation
 
-You can, but probably shouldn't at the moment, install the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/blogyaml")
 ```
-## Example
+## How and why use this app
 
 Here is how to launch the app.
 
@@ -30,6 +30,10 @@ The workflow shoud ideally be:
 * Have a look at changes in a git editor before committing/pushing/merging them.
 
 This sounds in my opinion more appealing than opening each post on its own, because one gets to see all posts at once. My goal is to make adding tags to posts as user-friendly as adding topics to GitHub repositories.
+
+## What this app shouldn't be used for
+
+Standardization of tags (e.g. making all tags lowercase, or transforming all occurrences of "Community" into "community") doesn't need to happen manually via this app. It can be scripted using [`blogdown:::modify_yaml`](https://bookdown.org/yihui/blogdown/from-jekyll.html) or similar helpers, cf [this example](https://github.com/ropensci/roweb2/issues/197#issuecomment-394264824).
 
 ## Note
 
