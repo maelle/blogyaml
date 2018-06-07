@@ -22,15 +22,23 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-     volumes <- c(here = .posts.path,
-               home = path.expand("~"))
-  shinyDirChoose(input, 'path', roots = volumes)
+  if (isTRUE(getOption("shiny.testmode"))) {
+    # Do something special here
+    path <- function(){
+      system.file(package = "blogyaml", "example_blog")
+    }
+  }else{
+    volumes <- c(here = .posts.path,
+                 home = path.expand("~"))
+    shinyDirChoose(input, 'path', roots = volumes)
 
-  path <- reactive({
-    return(print(parseDirPath(volumes, input$path)))
-  })
+    path <- reactive({
+      return(print(parseDirPath(volumes, input$path)))
+    })
+
+  }
+
   output$pathtext <- renderText(path()[1])
-
   observeEvent(input$do, {
     initialtags <- blogyaml::get_tags(path()[1],
                                       format = input$format)
