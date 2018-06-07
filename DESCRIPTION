@@ -17,6 +17,6 @@ Imports:
     tibble,
     dplyr,
     yaml,
-    DT,
+    DT (>= 0.4.0),
     shinyFiles
 RoxygenNote: 6.0.1
