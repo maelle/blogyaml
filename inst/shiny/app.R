@@ -10,7 +10,7 @@ ui <- dashboardPage(
     shinyDirButton(id = "path",
               label = "path to posts",
               title = "path to posts"),
-    verbatimTextOutput("path", placeholder = TRUE),
+    verbatimTextOutput("pathtext", placeholder = TRUE),
     checkboxGroupInput("format", "Post format",
                        choices = c("*.md", "*.Rmd"),
                        selected = "*.md"),
@@ -29,7 +29,7 @@ server <- function(input, output) {
   path <- reactive({
     return(print(parseDirPath(volumes, input$path)))
   })
-  output$path <- renderText(path()[1])
+  output$pathtext <- renderText(path()[1])
 
   observeEvent(input$do, {
     initialtags <- blogyaml::get_tags(path()[1],
