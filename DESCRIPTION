@@ -19,7 +19,10 @@ Imports:
     yaml,
     DT (>= 0.4.0),
     shinyFiles,
-    glue
+    glue,
+    purrr,
+    tidyr,
+    shiny
 RoxygenNote: 6.0.1
 Suggests: 
     testthat,

@@ -1,4 +1,6 @@
-#' Title
+#' Function returning tags
+#'
+#' It returns a data.frame of filenames and tags as Booleans. A nice rectangle!
 #'
 #' @param path Path to where the posts are located
 #' @param format String of post formats
@@ -7,6 +9,8 @@
 #' @export
 #'
 #' @examples
+#' blog_path <- system.file(package = "blogyaml", "example_blog")
+#' get_tags(blog_path, format = "*.md")
 get_tags <- function(path, format){
   if(length(format) == 0){
     stop("Indicate at least one post format either '*.md' or '*.Rmd' or well both",
@@ -26,7 +30,7 @@ get_tags <- function(path, format){
   tags_info <- unique(purrr::map_df(posts, get_tags_post, path = path))
   if(nrow(tags_info) > 0){
     tags_info$value <- TRUE
-    tags_info <- tidyr::spread(tags_info, tags, value, fill = FALSE)
+    tags_info <- tidyr::spread(tags_info, "tags", "value", fill = FALSE)
     tags_info <- tibble::tibble(file = posts) %>%
       dplyr::left_join(tags_info, by = "file")
     tags_info[is.na(tags_info)] <- FALSE

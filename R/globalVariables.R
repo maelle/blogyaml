@@ -1,0 +1,1 @@
+globalVariables(c(".posts.path"))

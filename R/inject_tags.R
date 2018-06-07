@@ -30,7 +30,7 @@ inject_tags_file <- function(tags_one, path){
     file_content <- file_content[(i[2]+1):length(file_content)]
     meta$tags <- tags
     file_content <- c(c("---"),
-                      blogdown:::as.yaml(meta),
+                      as.yaml(meta),
                       c("---"),
                       file_content)
     writeLines(file_content, file.path(path, file),

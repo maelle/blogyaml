@@ -9,9 +9,18 @@ edit_tags(path = getwd())
 \arguments{
 \item{path}{path to where the posts are found}
 }
+\description{
+Launch Shiny app for batch tag editing
+}
 \details{
 The YAML metadata can also be edited in other fields, e.g. a slug
 can become lala instead of 'lala' which should not pose any problem.
 That said, do check all edits before committing them (assuming your website is
  under version control!).
+}
+\examples{
+\dontrun{
+ blog_path <- system.file(package = "blogyaml", "example_blog")
+ edit_tags(blog_path)
+ }
 }

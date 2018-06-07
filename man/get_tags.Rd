@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_tags.R
 \name{get_tags}
 \alias{get_tags}
-\title{Title}
+\title{Function returning tags}
 \usage{
 get_tags(path, format)
 }
@@ -15,5 +15,9 @@ get_tags(path, format)
 data.frame of filenames and tags as Booleans
 }
 \description{
-Title
+It returns a data.frame of filenames and tags as Booleans. A nice rectangle!
+}
+\examples{
+blog_path <- system.file(package = "blogyaml", "example_blog")
+get_tags(blog_path, format = "*.md")
 }
