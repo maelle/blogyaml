@@ -8,7 +8,16 @@
 #'
 #' @examples
 get_tags <- function(path, format){
-  if(format == c("*Rmd", "*.md")){
+  if(length(format) == 0){
+    stop("Indicate at least one post format either '*.md' or '*.Rmd' or well both",
+         call. = FALSE)
+  }
+
+  if(!all(format %in% c("*.md", "*.Rmd"))){
+    stop("Post format has to be either '*.md' or '*.Rmd' or well both",
+         call. = FALSE)
+  }
+  if(length(format == 2)){
     format <- "*.(R)?md"
   }
   posts <- fs::dir_ls(path, regexp = format)

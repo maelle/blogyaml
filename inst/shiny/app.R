@@ -52,9 +52,18 @@ server <- function(input, output) {
       initialtags[,var] <- 0
     }
 
-
     tagsinfo <- as.data.frame(initialtags[, c("file", sort(c(newtags, tags)))])
     tagsinfo <<- tagsinfo
+
+
+  if(.Platform$OS.type == "windows"){
+    tagsinfo$file <- glue::glue( '<a  rel="noopener" target="_blank" href="{gsub("/", "\\\\\",
+                           file.path(path()[1], tagsinfo$file), fixed = TRUE)}">{tagsinfo$file}</a>')
+
+  }else{
+    tagsinfo$file <- glue::glue( '<a  rel="noopener" target="_blank" href="file.path(path()[1], tagsinfo$file)}">{tagsinfo$file}</a>')
+
+}
 
   output$tags1 = DT::renderDT(tagsinfo,
 editable = TRUE,
@@ -67,7 +76,8 @@ options = list(
   search = list(smart = TRUE),
   fixedColumns = list(leftColumns = 2),
   pageLength = 5
-))
+),
+escape = FALSE)
 
 
   })
@@ -79,7 +89,6 @@ options = list(
     i = info$row
     j = info$col
     v = info$value
-    print(tagsinfo[i, j])
     tagsinfo[i, j] <<- DT::coerceValue(v, tagsinfo[i, j])
     DT::replaceData(proxy, tagsinfo, resetPaging = FALSE)  # important
   })
