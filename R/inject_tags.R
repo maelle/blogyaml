@@ -6,10 +6,12 @@
 #' @export
 #'
 #' @examples
-#' path <- "C:\\Users\\Maelle\\Documents\\ropensci\\roweb2\\content\\blog"
-#' tags <- get_tags(path)
+#' \dontrun{
+#' path <- system.file(package = "blogyaml", "example_blog")
+#' tags <- get_tags(path, format = "*.md")
 #' # do something to tags
 #' inject_tags(path, tags)
+#' }
 inject_tags <- function(path, tags){
   tags_df <- split(tags, tags$file)
   purrr::walk(tags_df, inject_tags_file, path)

@@ -15,8 +15,10 @@ inject_tags(path, tags)
 Title
 }
 \examples{
-path <- "C:\\\\Users\\\\Maelle\\\\Documents\\\\ropensci\\\\roweb2\\\\content\\\\blog"
-tags <- get_tags(path)
+\dontrun{
+path <- system.file(package = "blogyaml", "example_blog")
+tags <- get_tags(path, format = "*.md")
 # do something to tags
 inject_tags(path, tags)
+}
 }
