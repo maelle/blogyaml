@@ -21,3 +21,8 @@ Imports:
     shinyFiles,
     glue
 RoxygenNote: 6.0.1
+Suggests: 
+    testthat,
+    shinytest (>= 1.3.0)
+Remotes:
+    rstudio/shinytest
