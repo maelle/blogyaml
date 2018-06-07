@@ -1,6 +1,7 @@
 # blogyaml
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip) [![Travis build status](https://travis-ci.org/ropenscilabs/blogyaml.svg?branch=master)](https://travis-ci.org/ropenscilabs/blogyaml) [![Coverage status](https://codecov.io/gh/ropenscilabs/blogyaml/branch/master/graph/badge.svg)](https://codecov.io/github/ropenscilabs/blogyaml?branch=master)
+
 
 
 The goal of `blogyaml` is to help batch editing tags of Markdown-based blog posts. The initial motivation is rOpenSci website. 

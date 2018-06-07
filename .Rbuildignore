@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^README_files$
+^\.travis\.yml$
+^codecov\.yml$
