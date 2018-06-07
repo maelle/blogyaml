@@ -15,11 +15,15 @@ get_tags <- function(path, format){
   posts <- purrr::map_chr(posts, get_filename)
   posts <- posts[!grepl("^\\_", posts)]
   tags_info <- unique(purrr::map_df(posts, get_tags_post, path = path))
-  tags_info$value <- TRUE
-  tags_info <- tidyr::spread(tags_info, tags, value, fill = FALSE)
-  tags_info <- tibble::tibble(file = posts) %>%
-    dplyr::left_join(tags_info, by = "file")
-  tags_info[is.na(tags_info)] <- FALSE
+  if(nrow(tags_info) > 0){
+    tags_info$value <- TRUE
+    tags_info <- tidyr::spread(tags_info, tags, value, fill = FALSE)
+    tags_info <- tibble::tibble(file = posts) %>%
+      dplyr::left_join(tags_info, by = "file")
+    tags_info[is.na(tags_info)] <- FALSE
+  }else{
+    tags_info <- tibble::tibble(file = posts)
+  }
   return(tags_info)
 }
 
