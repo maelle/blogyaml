@@ -69,7 +69,7 @@ server <- function(input, output) {
                            file.path(path()[1], tagsinfo$file), fixed = TRUE)}">{tagsinfo$file}</a>')
 
   }else{
-    tagsinfo$file <- glue::glue( '<a  rel="noopener" target="_blank" href="file.path(path()[1], tagsinfo$file)}">{tagsinfo$file}</a>')
+    tagsinfo$file <- glue::glue( '<a  rel="noopener" target="_blank" href="{file.path(path()[1], tagsinfo$file)}">{tagsinfo$file}</a>')
 
 }
 
