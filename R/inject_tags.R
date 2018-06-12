@@ -30,7 +30,7 @@ inject_tags_file <- function(tags_one, path){
     file_content <- readLines(file.path(path, file))
     i = grep('^---\\s*$', file_content)
     file_content <- file_content[(i[2]+1):length(file_content)]
-    meta$tags <- tags
+    meta$tags <- as.list(tags)
     file_content <- c(c("---"),
                       as.yaml(meta),
                       c("---"),
