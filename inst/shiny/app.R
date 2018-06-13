@@ -79,7 +79,7 @@ editable = TRUE,
 extensions = c('FixedColumns',
                'ColReorder'),
 options = list(
-  colReorder = TRUE,
+  colReorder = FALSE,
   scrollX = TRUE,
   search = list(smart = TRUE),
   fixedColumns = list(leftColumns = 2),
