@@ -76,10 +76,8 @@ server <- function(input, output) {
   output$tags1 = DT::renderDT(tagsinfo,
 editable = TRUE,
 #filter = "top",#didn't work well
-extensions = c('FixedColumns',
-               'ColReorder'),
+extensions = c('FixedColumns'),
 options = list(
-  colReorder = FALSE,
   scrollX = TRUE,
   search = list(smart = TRUE),
   fixedColumns = list(leftColumns = 2),
